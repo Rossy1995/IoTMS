@@ -22,7 +22,7 @@
     <string name="description">Description</string>
 
 
-    <string name="type_prompt">Choose a type</string>
+    <string name="type_prompt">Device details</string>
     <string-array name="feedbacktype">
         <item>@string/devicetype1</item>
         <item>@string/devicetype2</item>

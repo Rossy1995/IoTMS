@@ -12,11 +12,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:layout_width="300dp"
+        android:layout_height="400dp">
 
         <TextView
             android:id="@+id/add"
@@ -35,12 +34,11 @@
         </EditText>
 
         <EditText
-            android:id="@+id/EditTextFeedbackBody"
+            android:id="@+id/EditDecription"
             android:layout_height="wrap_content"
             android:hint="Description:"
             android:inputType="textMultiLine"
-            android:layout_width="fill_parent"
-            android:text="@string/description">
+            android:layout_width="fill_parent">
         </EditText>
 
         <TextView

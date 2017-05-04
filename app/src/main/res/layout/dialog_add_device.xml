@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              >
+
+    <TextView
+        android:id="@+id/SelectType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/type_prompt"
+        android:textSize="15pt"
+        android:textStyle="normal|bold"
+        android:layout_gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:background="@android:color/background_light"
+        android:textAlignment="center">
+    </TextView>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Device Type"
+        android:id="@+id/TypeSpinner"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/SelectType"
+        />
+
+    <EditText
+        android:id="@+id/EditTextName"
+        android:layout_height="wrap_content"
+        android:hint="Name:"
+        android:inputType="textPersonName"
+        android:layout_width="fill_parent"
+        android:padding="10dp">
+    </EditText>
+
+    <EditText
+        android:id="@+id/EditDecription"
+        android:layout_height="wrap_content"
+        android:hint="Description:"
+        android:inputType="textMultiLine"
+        android:layout_width="fill_parent"
+        android:padding="10dp"
+        android:paddingBottom="20dp">
+    </EditText>
+
+    <Button
+        android:text="Submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitButton"
+        android:layout_below="@+id/TypeSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>
