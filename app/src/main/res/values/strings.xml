@@ -18,4 +18,15 @@
     <string name="devicetype1">Fridge</string>
     <string name="devicetype2">Heater</string>
     <string name="devicetype3">Lighting</string>
+    <string name="add_device">Add Device</string>
+    <string name="description">Description</string>
+
+
+    <string name="type_prompt">Choose a type</string>
+    <string-array name="feedbacktype">
+        <item>@string/devicetype1</item>
+        <item>@string/devicetype2</item>
+        <item>@string/devicetype3</item>
+    </string-array>
+
 </resources>
