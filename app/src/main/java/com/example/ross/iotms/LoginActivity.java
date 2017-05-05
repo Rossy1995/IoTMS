@@ -28,11 +28,10 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = (EditText) findViewById(R.id.username);
         txtPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.login);
-        btnRegister = (Button) findViewById(R.id.login);
+        btnRegister = (Button) findViewById(R.id.register);
 
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
-
 
         btnLogin.setOnClickListener(new android.view.View.OnClickListener() {
 
