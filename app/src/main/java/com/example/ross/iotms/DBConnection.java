@@ -36,7 +36,7 @@ public class DBConnection extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String DATABASE_CREATE = "CREATE TABLE Controller (Controller_ID integer primary key autoincrement,Username text not null,Password text not null);";
         db.execSQL(DATABASE_CREATE);
-        db.execSQL("create table " + DEVICES_TABLE_NAME + " (DEVICE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DEVICE_NAME TEXT,DEVICE_TYPE TEXT, DEVICE_DESCRIPTION TEXT)");
+        db.execSQL("create table " + DEVICES_TABLE_NAME + " (_ID PRIMARY KEY AUTOINCREMENT, DEVICE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DEVICE_NAME TEXT,DEVICE_TYPE TEXT, DEVICE_DESCRIPTION TEXT)");
         //.execSQL("create table " + READINGS_TABLE_NAME + " (READING_ID INTEGER PRIMARY KEY AUTOINCREMENT,DEVICE_ID INTEGER,READING_DATETIME DATE, ENERGY_CONSUMPTION DOUBLE, STATUS TEXT, READING DOUBLE)");
     }
 
@@ -70,7 +70,7 @@ public class DBConnection extends SQLiteOpenHelper {
 
     public Cursor getAllData (){
         SQLiteDatabase db  = this.getWritableDatabase();
-        Cursor result = db.rawQuery("select * from " +DEVICES_TABLE_NAME +" order by " + R_COL_1, null); // selects all from db sorting by score ASC
+        Cursor result = db.rawQuery("select * from " + DEVICES_TABLE_NAME, null); // selects all from db sorting by score ASC
         return result;
     }
 }
