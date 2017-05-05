@@ -48,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                startActivity(new Intent(MainActivity.this, AddActivity.class));
-
-                startActivity(new Intent(v.getContext(), AddActivity.class));
-                */
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
                 View myView = getLayoutInflater().inflate(R.layout.dialog_add_device, null);
                 final EditText mName = (EditText) myView.findViewById(R.id.EditTextName);

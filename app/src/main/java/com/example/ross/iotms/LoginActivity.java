@@ -1,6 +1,7 @@
 package com.example.ross.iotms;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtPassword;
     Button btnLogin;
     Button btnRegister;
+    DBConnection myDbConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.login);
         btnRegister = (Button) findViewById(R.id.register);
 
+        myDbConnection = new DBConnection(this);
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
 
@@ -50,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this,
                                     "Successfully Logged In", Toast.LENGTH_LONG)
                                     .show();
+
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(LoginActivity.this,
                                     "Invalid username or password",
