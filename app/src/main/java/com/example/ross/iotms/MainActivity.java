@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     static Context mDialogContext = null;
+    DBConnection myDbConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDialogContext = this;
-
+        myDbConnection = new DBConnection(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,22 +58,25 @@ public class MainActivity extends AppCompatActivity {
                 adapter = ArrayAdapter.createFromResource(mDialogContext, R.array.devicetypelist, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
-                Button mLogIn = (Button) myView.findViewById(R.id.submitButton);
+                Button submit = (Button) myView.findViewById(R.id.submitButton);
+                mBuilder.setView(myView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
 
-                mLogIn.setOnClickListener(new View.OnClickListener() {
+                submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(!mName.getText().toString().isEmpty() && !mDescription.getText().toString().isEmpty()){
-                            Toast.makeText(MainActivity.this, "Device Added", Toast.LENGTH_SHORT).show();
+                            boolean inserted = myDbConnection.insertData(mName.getText().toString(), spinner.getSelectedItem().toString(), mDescription.getText().toString());
+                            if (inserted = true) {
+                                Toast.makeText(MainActivity.this, "Device Added", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
                         } else {
-                            Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Please fill out entire form", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                mBuilder.setView(myView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
