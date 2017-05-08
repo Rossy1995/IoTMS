@@ -7,6 +7,12 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.ross.iotms.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
+    </RelativeLayout>
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,9 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@android:drawable/ic_input_add" />
 
-    <Button
+    <!--<Button
         android:id="@+id/btngraph"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,10 +46,9 @@
         android:text="graph"
         android:onClick="graphPage"
         app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="bottom|center_horizontal" />
+        app:layout_anchorGravity="bottom|center_horizontal" />-->
 
     <include layout="@layout/content_main"
         android:id="@+id/include" />
-
 
 </android.support.design.widget.CoordinatorLayout>

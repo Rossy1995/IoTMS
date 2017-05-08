@@ -16,10 +16,10 @@ public class DBConnection extends SQLiteOpenHelper {
     public static final String C_COL_2 = "Username";
     public static final String C_COL_3 = "Password";
 
-    public static final String D_COL_1 = "Device_ID";
-    public static final String D_COL_2 = "Device_Name";
-    public static final String D_COL_3 = "Device_Type";
-    public static final String D_COL_4 = "Device_Description";
+    public static final String D_COL_1 = "_id";
+    public static final String D_COL_2 = "DEVICE_NAME";
+    public static final String D_COL_3 = "DEVICE_TYPE";
+    public static final String D_COL_4 = "DEVICE_DESCRIPTION";
 
     public static final String R_COL_1 = "Reading_ID";
     public static final String R_COL_2 = "Device_ID";
@@ -36,7 +36,7 @@ public class DBConnection extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String DATABASE_CREATE = "CREATE TABLE Controller (Controller_ID integer primary key autoincrement,Username text not null,Password text not null);";
         db.execSQL(DATABASE_CREATE);
-        db.execSQL("create table " + DEVICES_TABLE_NAME + " (_ID PRIMARY KEY AUTOINCREMENT, DEVICE_ID INTEGER PRIMARY KEY AUTOINCREMENT,DEVICE_NAME TEXT,DEVICE_TYPE TEXT, DEVICE_DESCRIPTION TEXT)");
+        db.execSQL("CREATE TABLE " + DEVICES_TABLE_NAME + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, DEVICE_NAME TEXT,DEVICE_TYPE TEXT, DEVICE_DESCRIPTION TEXT)");
         //.execSQL("create table " + READINGS_TABLE_NAME + " (READING_ID INTEGER PRIMARY KEY AUTOINCREMENT,DEVICE_ID INTEGER,READING_DATETIME DATE, ENERGY_CONSUMPTION DOUBLE, STATUS TEXT, READING DOUBLE)");
     }
 
@@ -49,11 +49,11 @@ public class DBConnection extends SQLiteOpenHelper {
     }
 
     public boolean insertData (String name, String type, String description){
-        SQLiteDatabase db  = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(R_COL_2, name);
-        contentValues.put(R_COL_3, type);
-        contentValues.put(R_COL_4, description);
+        contentValues.put(D_COL_2, name);
+        contentValues.put(D_COL_3, type);
+        contentValues.put(D_COL_4, description);
         Long result  = db.insert(DEVICES_TABLE_NAME, null, contentValues); // inserts parsed values into TABLE_NAME
         if (result == -1){
             return false;
@@ -69,8 +69,8 @@ public class DBConnection extends SQLiteOpenHelper {
      */
 
     public Cursor getAllData (){
-        SQLiteDatabase db  = this.getWritableDatabase();
-        Cursor result = db.rawQuery("select * from " + DEVICES_TABLE_NAME, null); // selects all from db sorting by score ASC
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.rawQuery("select rowid _id, DEVICE_NAME, DEVICE_TYPE, DEVICE_DESCRIPTION from " + DEVICES_TABLE_NAME, null); // selects all from db sorting by score ASC
         return result;
     }
 }

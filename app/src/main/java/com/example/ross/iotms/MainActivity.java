@@ -24,6 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,15 +34,18 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<CharSequence> adapter;
     static Context mDialogContext = null;
     DBConnection myDbConnection;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        myDbConnection = new DBConnection(this);
         //btnGraph = (Button) findViewById(R.id.login);
         setSupportActionBar(toolbar);
         mDialogContext = this;
+        retrieveDevices();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -51,25 +56,29 @@ public class MainActivity extends AppCompatActivity {
                 final EditText mName = (EditText) myView.findViewById(R.id.EditTextName);
                 final EditText mDescription = (EditText) myView.findViewById(R.id.EditDecription);
                 spinner = (Spinner) myView.findViewById(R.id.TypeSpinner);
-                adapter = ArrayAdapter.createFromResource(mDialogContext, R.array.devicetypelist, android.R.layout.simple_spinner_item);
+                adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.devicetypelist, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
-                Button mLogIn = (Button) myView.findViewById(R.id.submitButton);
+                Button submitDevice = (Button) myView.findViewById(R.id.submitButton);
+                mBuilder.setView(myView);
+                dialog = mBuilder.create();
+                dialog.show();
 
-                mLogIn.setOnClickListener(new View.OnClickListener() {
+                submitDevice.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(!mName.getText().toString().isEmpty() && !mDescription.getText().toString().isEmpty()){
-                            Toast.makeText(MainActivity.this, "Device Added", Toast.LENGTH_SHORT).show();
+                            boolean insert = myDbConnection.insertData(mName.getText().toString(), spinner.getSelectedItem().toString(), mDescription.getText().toString());
+                            if (insert){
+                                Toast.makeText(MainActivity.this, "Device Added", Toast.LENGTH_SHORT).show();
+                                retrieveDevices();
+                                dialog.dismiss();
+                            }
                         } else {
                             Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
-
-                mBuilder.setView(myView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
             }
         });
     }
@@ -79,6 +88,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private void retrieveDevices(){
+        Cursor myCursor = myDbConnection.getAllData();
+        String [] fields = new String [] {myDbConnection.D_COL_2, myDbConnection.D_COL_3, myDbConnection.D_COL_4};
+        int [] view = new int [] {R.id.name, R.id.type, R.id.desc};
+        SimpleCursorAdapter myCursorAdaptor;
+        myCursorAdaptor = new SimpleCursorAdapter(getBaseContext(), R.layout.item_layout, myCursor, fields, view, 0);
+        ListView myList = (ListView) findViewById(R.id.deviceGrid);
+        myList.setAdapter(myCursorAdaptor);
     }
 
     @Override
@@ -96,3 +115,5 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
