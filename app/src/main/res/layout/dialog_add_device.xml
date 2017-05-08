@@ -10,15 +10,14 @@
         android:id="@+id/SelectType"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/type_prompt"
+        android:text="New Device"
         android:textSize="10pt"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
-        android:textStyle="normal|bold"
         android:layout_gravity="center"
+        android:textAlignment="center"
         android:paddingBottom="10dp"
-        android:paddingTop="5dp"
-        android:textAlignment="center">
+        android:paddingTop="5dp">
     </TextView>
 
     <EditText
@@ -47,11 +46,9 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Device Type"
-        android:textColorHint="@color/colorPrimary"
-        android:textColor="@android:color/white"
         android:id="@+id/TypeSpinner"
-        android:padding="10dp"
+        android:paddingLeft="5dp"
+        android:paddingBottom="20dp"
         android:layout_toRightOf="@+id/SelectType"
         />
 

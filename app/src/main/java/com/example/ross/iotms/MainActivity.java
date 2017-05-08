@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     private void retrieveDevices(){
         Cursor myCursor = myDbConnection.getAllData();
         String [] fields = new String [] {myDbConnection.D_COL_2, myDbConnection.D_COL_3, myDbConnection.D_COL_4};
@@ -99,6 +100,14 @@ public class MainActivity extends AppCompatActivity {
         ListView myList = (ListView) findViewById(R.id.deviceGrid);
         myList.setAdapter(myCursorAdaptor);
     }
+    /**
+     * Starts GameActivity
+     * @param view enables the enables the method to used as onClick in the XML
+     */
+    public void graphView (View view){ // used to begin the game by creating an intent and starting an activity based on that activity
+        Intent intent = new Intent(this, GraphActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -107,8 +116,9 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent1 = new Intent(this,GraphActivity.class);
+            this.startActivity(intent1);
             return true;
         }
 
