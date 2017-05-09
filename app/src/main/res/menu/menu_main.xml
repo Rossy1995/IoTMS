@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="graph"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings_2"
+        android:orderInCategory="100"
+        android:title="data insert"
+        app:showAsAction="never" />
 </menu>

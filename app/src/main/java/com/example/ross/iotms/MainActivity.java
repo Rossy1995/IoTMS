@@ -3,6 +3,7 @@ package com.example.ross.iotms;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -26,6 +27,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import static android.R.attr.data;
+import static com.example.ross.iotms.DBConnection.READINGS_TABLE_NAME;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         myDbConnection = new DBConnection(this);
-        //btnGraph = (Button) findViewById(R.id.login);
         setSupportActionBar(toolbar);
         mDialogContext = this;
         retrieveDevices();
@@ -92,22 +95,39 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void retrieveDevices(){
-        Cursor myCursor = myDbConnection.getAllData();
+        final Cursor myCursor = myDbConnection.getAllData();
         String [] fields = new String [] {myDbConnection.D_COL_2, myDbConnection.D_COL_3, myDbConnection.D_COL_4};
         int [] view = new int [] {R.id.name, R.id.type, R.id.desc};
         SimpleCursorAdapter myCursorAdaptor;
         myCursorAdaptor = new SimpleCursorAdapter(getBaseContext(), R.layout.item_layout, myCursor, fields, view, 0);
-        ListView myList = (ListView) findViewById(R.id.deviceGrid);
+        final ListView myList = (ListView) findViewById(R.id.deviceGrid);
         myList.setAdapter(myCursorAdaptor);
+
+
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent graphIntent = new Intent(getApplicationContext(), GraphActivity.class);
+                startActivity(graphIntent);
+            }
+        });
     }
-    /**
-     * Starts GameActivity
-     * @param view enables the enables the method to used as onClick in the XML
-     */
-    public void graphView (View view){ // used to begin the game by creating an intent and starting an activity based on that activity
-        Intent intent = new Intent(this, GraphActivity.class);
-        startActivity(intent);
-    }
+
+     /*lv.setOnItemClickListener(new OnItemClickListener() {
+
+        public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+
+            c.moveToPosition(pos);
+            int rowId = c.getInt(c.getColumnIndexOrThrow("_id"));
+            Uri outURI = Uri.parse(data.toString() + rowId);
+            Intent outData = new Intent();
+            outData.setData(outURI);
+            setResult(Activity.RESULT_OK, outData);
+            finish();
+        }
+
+    });*/
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -117,8 +137,13 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-            Intent intent1 = new Intent(this,GraphActivity.class);
-            this.startActivity(intent1);
+            Intent graphIntent = new Intent(this,GraphActivity.class);
+            this.startActivity(graphIntent);
+            return true;
+        }
+        if (id == R.id.action_settings_2) {
+            DBConnection db = new DBConnection(mDialogContext);
+            db.insertReadingsData();
             return true;
         }
 
