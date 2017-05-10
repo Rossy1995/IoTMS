@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#202020</color>
     <color name="colorAccent">#3caae0</color>
     <color name="list">#f7f7f7</color>
+    <color name="hint">#dcdcdc</color>
 </resources>

@@ -4,12 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.session.MediaSessionManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,24 +21,15 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.List;
-
-import static android.R.attr.data;
-import static com.example.ross.iotms.DBConnection.READINGS_TABLE_NAME;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    GridView deviceGrid;
-    Spinner spinner;
+    Spinner dialogSpinner;
     ArrayAdapter<CharSequence> adapter;
-    static Context mDialogContext = null;
     DBConnection myDbConnection;
     AlertDialog dialog;
-    MediaSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,31 +38,30 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         myDbConnection = new DBConnection(this);
         setSupportActionBar(toolbar);
-        mDialogContext = this;
         retrieveDevices();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(MainActivity.this);
                 View myView = getLayoutInflater().inflate(R.layout.dialog_add_device, null);
-                final EditText mName = (EditText) myView.findViewById(R.id.EditTextName);
-                final EditText mDescription = (EditText) myView.findViewById(R.id.EditDecription);
-                spinner = (Spinner) myView.findViewById(R.id.TypeSpinner);
+                final EditText dialogName = (EditText) myView.findViewById(R.id.EditTextName);
+                final EditText dialogDescription = (EditText) myView.findViewById(R.id.EditDecription);
+                dialogSpinner = (Spinner) myView.findViewById(R.id.TypeSpinner);
                 adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.devicetypelist, R.layout.spinner_layout);
                 adapter.setDropDownViewResource(R.layout.spinner_layout);
-                spinner.setAdapter(adapter);
+                dialogSpinner.setAdapter(adapter);
                 Button submitDevice = (Button) myView.findViewById(R.id.submitButton);
-                mBuilder.setView(myView);
-                dialog = mBuilder.create();
+                myBuilder.setView(myView);
+                dialog = myBuilder.create();
                 dialog.show();
 
                 submitDevice.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!mName.getText().toString().isEmpty() && !mDescription.getText().toString().isEmpty()){
-                            boolean insert = myDbConnection.insertData(mName.getText().toString(), spinner.getSelectedItem().toString(), mDescription.getText().toString());
+                        if(!dialogName.getText().toString().isEmpty() && !dialogDescription.getText().toString().isEmpty()){
+                            boolean insert = myDbConnection.insertData(dialogName.getText().toString(), dialogSpinner.getSelectedItem().toString(), dialogDescription.getText().toString());
                             if (insert){
                                 Toast.makeText(MainActivity.this, "Device Added", Toast.LENGTH_SHORT).show();
                                 retrieveDevices();

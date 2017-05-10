@@ -28,12 +28,6 @@ public class DBConnection extends SQLiteOpenHelper {
     public static final String D_COL_3 = "DEVICE_TYPE";
     public static final String D_COL_4 = "DEVICE_DESCRIPTION";
 
-    public static final String R_COL_1 = "Reading_ID";
-    public static final String R_COL_2 = "Device_ID";
-    public static final String R_COL_3 = "Reading_DateTime";
-    public static final String R_COL_4 = "Energy_Consumption";
-    public static final String R_COL_5 = "Status";
-    public static final String R_COL_6 = "Reading";
 
     public DBConnection(Context context) {
         super(context, DATABASE_NAME, null, 1);

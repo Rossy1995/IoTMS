@@ -46,7 +46,7 @@ public class GraphActivity extends AppCompatActivity {
         staticLabelsFormatter.setVerticalLabels(new String[] {"0", "1", "2", "3", "4", "5"});
         graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
 
-        average.setText("Average: 1503 (kW/h)");
+        average.setText("Average: " + (random.nextInt(1500) + 500) +" (kW/h)");
 
         double val = (70 - 20) * random.nextDouble();
         val = val*100;
