@@ -28,8 +28,6 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
         GraphView graph = (GraphView) findViewById(R.id.graph);
-
-
         graph.addSeries(series);
         graph.setTitle("Live Energy Consumption");
 

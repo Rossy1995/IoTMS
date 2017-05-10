@@ -141,11 +141,6 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(graphIntent);
             return true;
         }
-        if (id == R.id.action_settings_2) {
-            DBConnection db = new DBConnection(mDialogContext);
-            db.insertReadingsData();
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
