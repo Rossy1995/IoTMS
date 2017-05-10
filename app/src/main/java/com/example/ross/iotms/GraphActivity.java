@@ -1,9 +1,7 @@
 package com.example.ross.iotms;
 
-import android.graphics.Canvas;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
@@ -40,6 +38,7 @@ public class GraphActivity extends AppCompatActivity {
         GridLabelRenderer gridLabel = graphView.getGridLabelRenderer();
 
         graphView.setTitleTextSize(45);
+        graphView.setTitle("Live Energy Consumption");
         gridLabel.setVerticalAxisTitle("Watt's");
         gridLabel.setHorizontalAxisTitle("Seconds passed");
 
@@ -57,7 +56,6 @@ public class GraphActivity extends AppCompatActivity {
         estimateCost.setText("Estimated monthly cost: £" + val);
 
         graphView.addSeries(series);
-        graphView.setTitle("Live Energy Consumption");
 
         // set manual X bounds
         graphView.getViewport().setXAxisBoundsManual(true);
@@ -123,14 +121,5 @@ public class GraphActivity extends AppCompatActivity {
     private int dataValue (){
         return  random.nextInt(5) + 1;
     }
-
-    // public void setVerticalAxisTitle(java.lang.String mVerticalAxisTitle) {
-
-   // }
-
-   // public java.lang.String getVerticalAxisTitle() {
-
-   // }
-
 
 }
