@@ -16,12 +16,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/devices_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".AddActivity"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,7 +30,8 @@
         </activity>
         <activity android:name=".GraphActivity"
             android:label="@string/graph_page"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

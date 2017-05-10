@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed()
+    {}
+
 
     private void retrieveDevices(){
         final Cursor myCursor = myDbConnection.getAllData();
