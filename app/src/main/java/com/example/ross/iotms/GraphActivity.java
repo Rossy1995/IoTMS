@@ -93,7 +93,7 @@ public class GraphActivity extends AppCompatActivity {
                             TextView sum = (TextView)findViewById(R.id.sum);        // if it works it works
                             addEntry();
                             sumWattage = sumWattage + value;
-                            sum.setText("Total watts used: " + String.valueOf(sumWattage) + " (kW)");
+                            sum.setText("Total watts: " + String.valueOf(sumWattage) + " (kW)");
                         }
                     });
 
