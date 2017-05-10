@@ -158,6 +158,22 @@ public class MainActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         }
+        else if (id == R.id.help)
+        {
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+            mBuilder.setTitle("Help")
+                    .setMessage("This application is used to list and monitor all your Internet of Thing" +
+                            " devices.\n\n" +
+                            "To add a device, click the button on the bottom right-hand corner of the screen.\n\n" +
+                            "To see graphs based upon a device, click on the device in the list on the Main Menu.")
+
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
         return super.onOptionsItemSelected(item);
     }
 
