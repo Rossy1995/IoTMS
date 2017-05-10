@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ross.iotms.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/help"
         android:orderInCategory="100"
-        android:title="graph"
+        android:title="@string/help"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_settings_2"
+        android:id="@+id/log_out"
         android:orderInCategory="100"
-        android:title="data insert"
+        android:title="@string/log_out"
         app:showAsAction="never" />
 </menu>
