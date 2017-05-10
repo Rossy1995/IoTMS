@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 final EditText mName = (EditText) myView.findViewById(R.id.EditTextName);
                 final EditText mDescription = (EditText) myView.findViewById(R.id.EditDecription);
                 spinner = (Spinner) myView.findViewById(R.id.TypeSpinner);
-                adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.devicetypelist, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                adapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.devicetypelist, R.layout.spinner_layout);
+                adapter.setDropDownViewResource(R.layout.spinner_layout);
                 spinner.setAdapter(adapter);
                 Button submitDevice = (Button) myView.findViewById(R.id.submitButton);
                 mBuilder.setView(myView);
