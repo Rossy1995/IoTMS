@@ -1,9 +1,11 @@
 package com.example.ross.iotms;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.session.MediaSessionManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     static Context mDialogContext = null;
     DBConnection myDbConnection;
     AlertDialog dialog;
+    MediaSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,14 +139,29 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            Intent graphIntent = new Intent(this,GraphActivity.class);
-            this.startActivity(graphIntent);
-            return true;
+        if (id == R.id.log_out) {
+            AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
+                    mBuilder.setTitle("Logout")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
-
         return super.onOptionsItemSelected(item);
     }
+
+
 }
 
 
