@@ -13,9 +13,23 @@
     tools:context="com.example.ross.iotms.MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/type"
+        android:backgroundTint="@android:color/background_light"
+        android:gravity="center"
+        android:text="List of IoT devices"
+        android:textColor="@android:color/white"
+        android:paddingBottom="12sp">
+
+    </TextView>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/deviceGrid" />
+        android:id="@+id/deviceGrid"
+        android:layout_below="@+id/label" />
 
 </RelativeLayout>
